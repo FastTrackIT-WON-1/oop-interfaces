@@ -30,6 +30,8 @@ namespace InterfaceExercises
 
         public double Height { get; }
 
+        public override string Name { get { return "Rectangle"; } }
+
         public override double GetArea()
         {
             return this.Height * this.Width;

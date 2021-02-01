@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Text;
 
 namespace InterfaceExercises
 {
-    public abstract class Shape : IObjectWithArea, ITranslatableObject, IRotatableObject
+    public abstract class Shape : IShape
     {
         protected Shape(params Point[] points)
         {
@@ -14,6 +15,8 @@ namespace InterfaceExercises
             Points = points ?? new Point[0];
         }
 
+        public abstract string Name { get; }
+
         public Point[] Points { get; }
 
         public abstract double GetArea();
@@ -24,6 +27,21 @@ namespace InterfaceExercises
             {
                 p.Move(dx, dy);
             }
+        }
+
+        public void Print()
+        {
+            StringBuilder pointsCoords = new StringBuilder();
+            pointsCoords.Append("[");
+
+            foreach (Point p in Points)
+            {
+                pointsCoords.Append($"(X={p.X}, Y={p.Y}),");
+            }
+
+            pointsCoords.Append("]");
+
+            Console.WriteLine($"{Name}: Area={GetArea()}, Points={pointsCoords}");
         }
 
         public void Rotate(double angleDegrees)
